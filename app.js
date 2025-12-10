@@ -51,7 +51,7 @@ class ImagePreviewApp {
                 
                 reader.onload = (e) => {
                     const imageData = {
-                        id: Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+                        id: Date.now() + '_' + Math.random().toString(36).substring(2, 11),
                         url: e.target.result,
                         name: file.name,
                         size: this.formatFileSize(file.size),

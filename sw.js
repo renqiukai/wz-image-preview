@@ -22,7 +22,7 @@ self.addEventListener('install', event => {
           // Try to cache optional files, don't fail if they're missing
           return Promise.all(
             optionalUrls.map(url => 
-              cache.add(url).catch(err => console.log('Optional resource not cached:', url))
+              cache.add(url).catch(() => console.log('Optional resource not cached:', url))
             )
           );
         });
