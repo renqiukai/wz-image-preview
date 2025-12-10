@@ -1,10 +1,12 @@
 const CACHE_NAME = 'image-preview-v1';
-const urlsToCache = [
+const essentialUrls = [
   './',
   './index.html',
   './styles.css',
   './app.js',
-  './manifest.json',
+  './manifest.json'
+];
+const optionalUrls = [
   './icon-192.png',
   './icon-512.png'
 ];
@@ -15,11 +17,14 @@ self.addEventListener('install', event => {
     caches.open(CACHE_NAME)
       .then(cache => {
         console.log('Cache opened');
-        return cache.addAll(urlsToCache.filter(url => 
-          !url.includes('.png') // Don't fail if icons don't exist yet
-        )).catch(err => {
-          console.log('Cache addAll error:', err);
-          return Promise.resolve(); // Continue even if some files fail
+        // Cache essential files first
+        return cache.addAll(essentialUrls).then(() => {
+          // Try to cache optional files, don't fail if they're missing
+          return Promise.all(
+            optionalUrls.map(url => 
+              cache.add(url).catch(err => console.log('Optional resource not cached:', url))
+            )
+          );
         });
       })
   );

@@ -26,16 +26,13 @@ html, body {
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 /* Hide scrollbar */
 .container::-webkit-scrollbar {
     display: none;
-}
-
-.container {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
 }
 
 .image-item {
@@ -55,6 +52,7 @@ html, body {
     object-fit: contain;
     user-select: none;
     -webkit-user-drag: none;
+    animation: fadeIn 0.3s ease-out;
 }
 
 .image-info {
@@ -192,10 +190,6 @@ html, body {
         opacity: 1;
         transform: scale(1);
     }
-}
-
-.image-item img {
-    animation: fadeIn 0.3s ease-out;
 }
 
 /* Touch feedback */
